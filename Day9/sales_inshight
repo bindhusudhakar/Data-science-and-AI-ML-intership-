@@ -1,0 +1,19 @@
+import numpy as np
+
+pm_values = np.array([85, 90, 78, 120, 95, 130, 100])
+
+
+average_pm = np.mean(pm_values)
+print("Average PM2.5 for the week:", average_pm)
+
+unhealthy_days = pm_values[pm_values > 100]
+print("PM2.5 values greater than 100:", unhealthy_days)
+
+
+total_days = len(pm_values)
+count_unhealthy = len(unhealthy_days)
+
+percentage_unhealthy = (count_unhealthy / total_days) * 100
+print("Percentage of unhealthy days:", percentage_unhealthy, "%")
+
+pm_values[pm_values > 100]
