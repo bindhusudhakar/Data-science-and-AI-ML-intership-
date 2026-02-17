@@ -12,10 +12,12 @@ df = pd.DataFrame({
                    "Below High School", "High School"],
     "Result": ["Fail", "Pass", "Fail", "Fail"]
 })
+print(df.isnull().sum())
 
 df[["Math","Science","English"]] = df[["Math","Science","English"]].fillna(df.mean(numeric_only=True))
 
 df["Name"] = df["Name"].str.title()
+print(df.isnull().sum())
 
 df["Avg"] = df[["Math","Science","English"]].mean(axis=1)
 
@@ -32,7 +34,7 @@ df["Risk_Level"] = df["Risk_Score"].apply(
               "High Risk"
 )
 
-print("Subject contributing most to failure:")
+print("\nSubject contributing most to failure:")
 print(df[df["Result"]=="Fail"][["Math","Science","English"]].mean())
 
 print("\nLow attendance always failing?")
@@ -47,7 +49,9 @@ print(df[df["Risk_Level"]=="High Risk"]["Study_Hours"].mean())
 print("\nCorrelation Matrix:")
 print(df.corr(numeric_only=True))
 
+
 df["Improvement_Potential"] = (100 - df["Avg"]) * (df["Attendance"]/100)
 
 print("\nHigh Potential but High Risk:")
+
 print(df[(df["Improvement_Potential"]>50) & (df["Risk_Level"]=="High Risk")])
